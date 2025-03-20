@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Navigation - St. Joseph's College</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background-image: url('./clg3.jpg');
+            margin: 0;
+            color: white;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: 03366; 
+            padding: 10px 20px;
+            position: relative;
+           
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            color: white;
+            font-size: 1.7em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo1 {
+            height: 100px;
+            margin-right: 15px;
+            width: 100px;
+        }
+        
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+           
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .navbar ul li a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #193977;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 100px auto 50px; 
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            color: black;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(32, 1, 1, 0.053);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        h1 {
+            color: rgb(255, 255, 255);
+        }
+
+        select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: none;
+            transition: 0.3s;
+        }
+
+        button {
+            background: linear-gradient(135deg, #ff0000, #ff3333);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #430303, #ff3333, #430303);
+            transform: scale(1.1);
+        }
+
+        iframe {
+            width: 100%;
+            height: 500px;
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar-right {
+            width: 250px;
+            height: calc(100vh - 40px   ); 
+          
+            color: white;
+            padding: 20px;
+            position: fixed;
+            right: 0;
+            top: 60px; 
+            overflow-y: auto;
+            backdrop-filter: blur(0px);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sidebar-right:hover {
+            transform: translateX(0);
+        }
+        
+        .event {
+            background: rgb(38 146 139 / 49%);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+            position:relative;
+        }
+
+        .event:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            background: rgba(85, 85, 85, 0.9);
+        }
+
+        .event h3 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+
+        .event p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        
+    
+    .sidebar-left {
+        width: 250px;
+        height: calc(100vh - 40px); 
+        color: white;
+        padding: 20px;
+        position: fixed;
+        left: 0;
+        top: 70px;
+        overflow-y: auto;
+        backdrop-filter: blur(0px);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .sidebar-left:hover {
+        transform: translateX(0);
+    }
+
+    .mess-menu {
+        background: rgb(38 146 139 / 49%);
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 10px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .mess-menu:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        background: rgba(85, 85, 85, 0.9);
+    }
+
+    .mess-menu h3 {
+        margin: 0 0 10px;
+        font-size: 1.2em;
+    }
+
+    .mess-menu p {
+        margin: 5px 0;
+        font-size: 0.9em;
+    }
+
+
+
+ 
+
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="logo1">
+        <img src="./Engg Logo1.png" alt="logo" width="100px" height="100px">
+    </div>
+       
+        <div class="logo">
+             St.Joseph's College of Engineering
+        </div>
+       
+        <ul>
+            <li><a href="https://stjosephs.ac.in/index.html">Home</a></li>
+            <li><a href="https://www.google.com/maps/d/u/0/viewer?mid=1B_ityVBFyS8pKvRHmk_RXgrkaKGhSrY&femb=1&ll=12.869385460048226%2C80.21573995&z=16">Campus Map</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="./sample.html">Feedback</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="elements">
+            <h2>Campus Navigation</h2>
+            <label for="searchType">Select Search Type:</label>
+            <select id="searchType" onchange="updateOptions()">
+                <option value="event">Event</option>
+                <option value="place">Place</option>
+            </select>
+
+            <label for="destination">Select Destination:</label>
+            <select id="destination"></select>
+
+            <button onclick="navigate()">Submit</button>
+
+            <iframe id="mapFrame" src="https://www.google.com/maps/d/embed?mid=1B_ityVBFyS8pKvRHmk_RXgrkaKGhSrY" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div class="sidebar-right">
+        <h2 >Upcoming Events</h2>
+        <div class="event">
+            <h3>Makeathon - College Fest</h3>
+            <p>Date: March 19, 2025</p>
+            <p>Location: CSE Block</p>
+        </div>
+        <div class="event">
+            <h3>Genetrix - CSE Fest</h3>
+            <p>Date: March 25, 2025</p>
+            <p>Location: CSE Block</p>
+        </div>
+        <div class="event">
+            <h3>Infotrix - IT Tech Fest</h3>
+            <p>Date: April 10, 2025</p>
+            <p>Location: IT Seminar Hall</p>
+        </div>
+        <div class="event">
+            <h3>Sports Meet</h3>
+            <p>Date: May 5, 2025</p>
+            <p>Location: College Ground</p>
+        </div>
+    </div>
+    <div class="sidebar-left">
+        <h2>Mess Menu</h2>
+        <div class="mess-menu">
+            <h3>Monday</h3>
+            <p>Rice, Dal, Chicken Curry, Salad</p>
+        </div>
+        <div class="mess-menu">
+            <h3>Tuesday</h3>
+            <p>Roti, Paneer, Rice, Salad</p>
+        </div>
+        <div class="mess-menu">
+            <h3>Wednesday</h3>
+            <p>Biryani, Raita, Salad</p>
+        </div>
+        <div class="mess-menu">
+            <h3>Thursday</h3>
+            <p>Rice, Sambar, Fish Curry, Salad</p>
+        </div>
+        <div class="mess-menu">
+            <h3>Friday</h3>
+            <p>Fried Rice, Noodles, Salad</p>
+        </div>
+        <div class="mess-menu">
+            <h3>Saturday</h3>
+            <p>Rice, Dal, Egg Curry, Salad</p>
+        </div>
+    </div>
+
+    <script>
+        const locations = {
+            event: [
+                {name: "Genetrix - CSE Department", latitude: 12.8696, longitude: 80.2202},
+                {name: "Infotrix - IT Department", latitude: 12.8698, longitude: 80.2205}
+            ],
+            place: [
+                {name: "Library", latitude: 12.86978, longitude: 80.21496},
+                {name: "Girls Veg Mess Hall", latitude: 12.86892, longitude: 80.21492},
+                {name: "Girls Hostel", latitude: 12.87163, longitude: 80.21486},
+                {name: "Trinity", latitude: 12.8714, longitude: 80.21576},
+                {name: "St. Joseph's Bus Depot", latitude: 12.8714, longitude: 80.21634},
+                {name: "Exam Block", latitude: 12.87079, longitude: 80.2165},
+                {name: "Department of Mechanical", latitude: 12.87004, longitude: 80.2169},
+                {name: "St Joseph's College Of Engineering", latitude: 12.86989, longitude: 80.21839},
+                {name: "Artificial Grounds", latitude: 12.86968, longitude: 80.21735},
+                {name: "Admin Block", latitude: 12.86942, longitude: 80.21678},
+                {name: "MGR Statue", latitude: 12.8696, longitude: 80.21578},
+                {name: "Innovation Center", latitude: 12.87011, longitude: 80.2171},
+                {name: "Department of EEE", latitude: 12.8703, longitude: 80.21546},
+                {name: "Indian Bank", latitude: 12.86846, longitude: 80.21515},
+                {name: "Indoor Auditorium Entrance", latitude: 12.8684, longitude: 80.21574},
+                {name: "Girls Non Veg Mess", latitude: 12.86833, longitude: 80.21627},
+                {name: "Basketball Ground", latitude: 12.86793, longitude: 80.21542},
+                {name: "Basketball Ground 2", latitude: 12.86766, longitude: 80.21658},
+                {name: "Mens Hostel", latitude: 12.86772, longitude: 80.21513}
+            ]
+        };
+
+        function updateOptions() {
+            const searchType = document.getElementById("searchType").value;
+            const destinationSelect = document.getElementById("destination");
+            destinationSelect.innerHTML = "";
+
+            locations[searchType].forEach(loc => {
+                let option = document.createElement("option");
+                option.value = `${loc.latitude},${loc.longitude}`;
+                option.textContent = loc.name;
+                destinationSelect.appendChild(option);
+            });
+        }
+
+        function navigate() {
+            const destination = document.getElementById("destination").value;
+            const baseUrl = "https://www.google.com/maps/dir/?api=1&origin=12.869944,80.218403&destination=";
+            window.open(baseUrl + destination, "_blank");
+        }
+
+        updateOptions();
+    </script>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Event Selection</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                padding: 20px;
+                background-color: #f4f4f4;
+            }
+    
+            .container {
+                max-width: 600px;
+            margin: 100px auto 50px; 
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            color: black;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(32, 1, 1, 0.053);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            }
+    
+            label, select {
+                display: block;
+                margin: 10px 0;
+            }
+    
+            .details {
+                margin-top: 20px;
+                padding: 15px;
+                border: 1px solid #ddd;
+                background: #f9f9f9;
+                border-radius: 5px;
+            }
+        </style>
+    
+    
+        <div class="container">
+            <h2>Select an Event</h2>
+    
+            <label for="eventSelect">Choose an Event:</label>
+            <select id="eventSelect">
+                <option value="concert">Concert</option>
+                <option value="sports">Sports Match</option>
+                <option value="conference">Conference</option>
+            </select>
+    
+            <div class="details" id="eventDetails">
+                <h3>Event Details</h3>
+                <p>Select an event to see details.</p>
+            </div>
+        </div>
+    
+        <script>
+            function updateEventDetails() {
+                const event = document.getElementById("eventSelect").value;
+                const details = document.getElementById("eventDetails");
+    
+                const eventInfo = {
+                    concert: {
+                        date: "April 15, 2025",
+                        venue: "Grand Music Hall, LA",
+                        description: "🎵 A live music concert featuring world-famous artists. Enjoy a night of unforgettable performances and entertainment!"
+                    },
+                    sports: {
+                        date: "May 10, 2025",
+                        venue: "National Stadium, NY",
+                        description: "⚽ A thrilling sports match between top-tier teams. Witness the excitement, energy, and passion of live sports!"
+                    },
+                    conference: {
+                        date: "June 22, 2025",
+                        venue: "Tech Hub Conference Center, SF",
+                        description: "📢 A business and tech conference featuring keynote speakers, networking sessions, and latest industry trends."
+                    }
+                };
+    
+                details.innerHTML = `
+                    <h3>Event Details</h3>
+                    <p><strong>Date:</strong> ${eventInfo[event].date}</p>
+                    <p><strong>Venue:</strong> ${eventInfo[event].venue}</p>
+                    <p><strong>Description:</strong> ${eventInfo[event].description}</p>
+                `;
+            }
+    
+            document.getElementById("eventSelect").addEventListener("change", updateEventDetails);
+        </script>
+   
+   
+    
+        </body>
+        </html>
